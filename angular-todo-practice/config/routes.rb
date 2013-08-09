@@ -1,4 +1,9 @@
 AngularTodoPractice::Application.routes.draw do
+
+  root to: 'lists#index'
+
+  resources :lists, only: [:index]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
