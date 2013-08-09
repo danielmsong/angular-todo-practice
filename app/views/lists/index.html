@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html ng-app>
+<!-- ng-app initializes the file as an angular app -->
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <!-- the above script loads in angular.js -->
+  <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <!-- we will be using the underscore library for access to the filter function -->
+  <script type="text/javascript" src="todo.js"></script>
+
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <!-- bootstrap 3 has separated icons so we load both stylesheets in -->
+
+  <link rel="stylesheet" href="normalize.css">
+  <!-- normalize for browser compatibility -->
+
+  <link rel="stylesheet" href="todo.css">
+</head>
+
+<body>
+  <div ng-controller="TodoCtrl">
+  <!-- the TodoCtrl controller can be accessed in todo.js, which has been loaded in -->
+  <!-- this div has access to all of TodoCtrl's functions -->
+    <h2>Total todos: {{getTotalTodos()}}</h2>
+    <!-- by wrapping this function call into handlebars, angular reads it not as a string but as a dynamic callback  -->
+    <ul class="list-unstyled">
+      <li ng-repeat="todo in todos">
+        <!-- ng-repeat loops over (i.e. for x in y) items in a collection -->
+        <input type="checkbox" ng-model="todo.done">
+        <!-- when this checkbox is clicked, the done attribute for the todo object is toggle -->
+        <span class="done-{{todo.done}}">{{todo.text}}</span>
+      </li>
+    </ul>
+    <form class="form-horizontal">
+      <input type="text" ng-model="formTodoText" ng-model-instant>
+      <button class="btn" ng-click="addTodo()"><i class="icon-plus"></i> Add</button>
+    </form>
+    <br />
+    <button class="btn-large" ng-click="clearCompleted()"><i class="icon-trash"></i> Clear Completed</button>
+  </div>
+</body>
+
+</html>
